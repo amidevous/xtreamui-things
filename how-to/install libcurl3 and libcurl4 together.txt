@@ -1,8 +1,9 @@
 after a simple search, you will find this
-https://launchpad.net/~xapienz/+archive/ubuntu/curl34
+https://launchpad.net/~andykimpe/+archive/ubuntu/curl
 
 How to install?
 
-sudo add-apt-repository ppa:xapienz/curl34
+sudo add-apt-repository ppa:andykimpe/curl
 sudo apt-get update
+sudo apt-get -y dist-upgrade
 sudo apt-get install libcurl4 curl
