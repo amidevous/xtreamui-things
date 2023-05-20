@@ -2,11 +2,14 @@ how to compile nginx with http2 ve up to date openssl
 
 https://fak3r.com/2015/09/29/howto-build-nginx-with-http-2-support/
 
-sudo apt-get -y install build-essential zlib1g-dev libpcre3 libpcre3-dev libbz2-dev libssl-dev libgd-dev libxslt-dev libgeoip-dev tar unzip curl
+
+sudo add-apt-repository ppa:maxmind/ppa -y
+sudo apt-get update
+sudo apt-get -y install build-essential zlib1g-dev libpcre3 libpcre3-dev libbz2-dev libssl-dev libgd-dev libxslt-dev libgeoip-dev tar unzip curl wget git libmaxminddb-dev
 
 
 cd /tmp/
-sudo wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz
+wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz
 tar -xzvf OpenSSL_1_1_1h.tar.gz
 
 ---copy /tmp/openssl.. folder name and use it on ngix ./configure, look at end of that row.
@@ -20,9 +23,6 @@ tar -xzvf nginx-1.9.9.tar.gz
 
 ----download geoip2 module files
 
-sudo add-apt-repository ppa:maxmind/ppa -y;
-sudo apt-get update;
-sudo apt-get install -y libmaxminddb-dev;
 git clone https://github.com/leev/ngx_http_geoip2_module.git
 
 
