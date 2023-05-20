@@ -1,6 +1,7 @@
 how to compile nginx with rtmp module
 
-sudo apt-get -y install build-essential zlib1g-dev libpcre3 libpcre3-dev libbz2-dev libssl-dev libgd-dev libxslt-dev libgeoip-dev tar unzip curl
+sudo add-apt-repository ppa:maxmind/ppa -y
+sudo apt-get -y install build-essential zlib1g-dev libpcre3 libpcre3-dev libbz2-dev libssl-dev libgd-dev libxslt-dev libgeoip-dev tar unzip curl wget git libmaxminddb-dev
 
 
 cd /tmp/
@@ -14,9 +15,7 @@ cd /tmp/
 
 #geoip2 module
 
-sudo add-apt-repository ppa:maxmind/ppa
-sudo apt-get update
-sudo apt-get install -y libmaxminddb-dev
+
 git clone https://github.com/leev/ngx_http_geoip2_module.git
 
 #nginx rtmp module
