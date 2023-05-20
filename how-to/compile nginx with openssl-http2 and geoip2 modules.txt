@@ -80,19 +80,6 @@ cd nginx-1.24.0
 # rpm --eval "%{build_ldflags}"
 # update with-cc-opt ussing
 # rpm --eval "%{optflags}"
-cd $HOME
-sudo rm -rf /tmp/ngx_http_geoip2_module
-sudo rm -rf /tmp/openssl-OpenSSL_1_1_1h
-sudo rm -rf /tmp/OpenSSL_1_1_1h.tar.gz
-sudo rm -rf /tmp/nginx-1.24.0.tar.gz
-sudo rm -rf /tmp/nginx-1.24.0
-cd /tmp/
-wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz
-tar -xzvf OpenSSL_1_1_1h.tar.gz
-wget http://nginx.org/download/nginx-1.24.0.tar.gz
-tar -xzvf nginx-1.24.0.tar.gz
-git clone https://github.com/leev/ngx_http_geoip2_module.git
-cd nginx-1.24.0
 ./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ \
 --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp \
 --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp \
