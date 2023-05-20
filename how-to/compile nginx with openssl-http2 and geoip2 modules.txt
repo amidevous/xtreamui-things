@@ -41,8 +41,6 @@ cd nginx-1.24.0
 
 #Build
 # for Ubuntu
-./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp --http-fastcgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/fastcgi_temp --lock-path=/home/xtreamcodes/iptv_xtream_codes/tmp/nginx.lock --http-uwsgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/uwsgi_temp --http-scgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/scgi_temp --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx/nginx.pid --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_v2_module --with-ld-opt='-Wl,-z,relro -Wl,--as-needed -static' --with-pcre --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-mail --with-mail_ssl_module --with-file-aio --with-cpu-opt=generic --add-module=/tmp/ngx_http_geoip2_module --with-openssl=/tmp/openssl-OpenSSL_1_1_1h --with-cc-opt='-static -static-libgcc -g -O2 -Wformat -Wall'
-# for Fedora, Centos Red Hat Entreprise and other fork
 ./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ \
 --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp \
 --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp \
@@ -62,7 +60,6 @@ cd nginx-1.24.0
 --with-http_gunzip_module \
 --with-http_gzip_static_module \
 --with-http_v2_module \
---with-ld-opt='$(rpm --eval "%{build_ldflags}")' \
 --with-pcre \
 --with-http_random_index_module \
 --with-http_secure_link_module \
@@ -75,7 +72,61 @@ cd nginx-1.24.0
 --with-cpu-opt=generic \
 --add-module=/tmp/ngx_http_geoip2_module \
 --with-openssl=/tmp/openssl-OpenSSL_1_1_1h \
---with-cc-opt='$(rpm --eval "%{optflags}")'
+--with-ld-opt='-Wl,-z,relro -Wl,--as-needed -static' \
+--with-cc-opt='-static -static-libgcc -g -O2 -Wformat -Wall'
+# for Fedora, Centos Red Hat Entreprise and other fork
+# if not work
+# update with-ld-opt using
+# rpm --eval "%{build_ldflags}"
+# update with-cc-opt ussing
+# rpm --eval "%{optflags}"
+cd $HOME
+sudo rm -rf /tmp/ngx_http_geoip2_module
+sudo rm -rf /tmp/openssl-OpenSSL_1_1_1h
+sudo rm -rf /tmp/OpenSSL_1_1_1h.tar.gz
+sudo rm -rf /tmp/nginx-1.24.0.tar.gz
+sudo rm -rf /tmp/nginx-1.24.0
+cd /tmp/
+wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz
+tar -xzvf OpenSSL_1_1_1h.tar.gz
+wget http://nginx.org/download/nginx-1.24.0.tar.gz
+tar -xzvf nginx-1.24.0.tar.gz
+git clone https://github.com/leev/ngx_http_geoip2_module.git
+cd nginx-1.24.0
+./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ \
+--http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp \
+--http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp \
+--http-fastcgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/fastcgi_temp \
+--lock-path=/home/xtreamcodes/iptv_xtream_codes/tmp/nginx.lock \
+--http-uwsgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/uwsgi_temp \
+--http-scgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/scgi_temp \
+--conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf \
+--error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/error.log \
+--http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/access.log \
+--pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx/nginx.pid \
+--with-http_ssl_module \
+--with-http_realip_module \
+--with-http_addition_module \
+--with-http_sub_module \
+--with-http_dav_module \
+--with-http_gunzip_module \
+--with-http_gzip_static_module \
+--with-http_v2_module \
+--with-pcre \
+--with-http_random_index_module \
+--with-http_secure_link_module \
+--with-http_stub_status_module \
+--with-http_auth_request_module \
+--with-threads \
+--with-mail \
+--with-mail_ssl_module \
+--with-file-aio \
+--with-cpu-opt=generic \
+--add-module=/tmp/ngx_http_geoip2_module \
+--with-openssl=/tmp/openssl-OpenSSL_1_1_1h \
+--with-ld-opt='-Wl,-z,relro -Wl,--as-needed -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -Wl,--build-id=sha1' \
+--with-cc-opt='-O2 -flto=auto -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer'
+
 
 --compile nginx,
 
