@@ -8,7 +8,8 @@ sudo add-apt-repository ppa:maxmind/ppa -y
 sudo apt-get update
 sudo apt-get -y install build-essential zlib1g-dev libpcre3 libpcre3-dev libbz2-dev libssl-dev libgd-dev libxslt-dev libgeoip-dev tar unzip curl wget git libmaxminddb-dev
 # for Fedora, Centos Red Hat Entreprise and other fork
-sudo dnf group install -y "C Development Tools and Libraries" "Development Tools"
+sudo dnf -y install epel-release
+sudo dnf group install --with-optional -y "C Development Tools and Libraries" "Development Tools"
 sudo dnf -y install zlib-devel pcre-devel bzip2-devel openssl-devel gd-devel libxslt-devel GeoIP-devel tar unzip curl wget git libmaxminddb-devel
 
 
